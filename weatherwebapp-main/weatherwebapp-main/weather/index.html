@@ -1,0 +1,248 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bootstrap demo</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/index.css">
+</head>
+
+<body>
+
+  <nav class="navbar navbar-expand-lg " id="nao">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="https://github.com/againdeepak/weatherwebapp">
+        <div id="we">Weather <img  id ="img2" src="/css/github.png" alt="logo" > </div>
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle \">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#" style="color:white;font-family: 'Times New Roman', Times, serif;">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="https://github.com/againdeepak/weatherwebapp" style="color:white;font-family: 'Times New Roman', Times, serif;">Github </a>
+          </li>
+          <!-- <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Dropdown
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="#">Action</a></li>
+              <li><a class="dropdown-item" href="#">Another action</a></li>
+              <li>
+                <hr class="dropdown-divider">
+              </li>
+              <li><a class="dropdown-item" href="#">Something else here</a></li>
+            </ul>
+          </li> -->
+          <li class="nav-item white">
+            <a style="color:white" class="nav-link disabled">Disabled</a>
+          </li>
+        </ul>
+        <form class="d-flex" role="search">
+          <input id="city" class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn  btn btn-success" type="submit" id="submit">Search</button>
+        </form>
+      </div>
+    </div>
+  </nav>
+  <h2 id="h2"> <span id="cityName"></span>
+  </h2>
+  <div id="carr" class="row row-cols-1 row-cols-md-3 g-4">
+    <div class="col">
+      <div class="card h-100">
+        <img style="border:1px solid white;"
+          src="https://cdn.pixabay.com/photo/2018/04/17/23/10/nature-3329096__340.jpg" class="card-img-top" alt="...">
+        <div class="card-body" id="card4">
+          <h5 class="card-title " id="cri">Wind Infromation</h5>
+          <!-- <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+           -->
+          <ul type="none">
+            <li>Cloud Pct = <span id="cloud_pct"></span> km/h</li>
+            <li>Wind Degree = <span id="wind_degrees"></span> km/h</li>
+            <li>Wind Speed = <span id="wind_speed"></span> km/h</li>
+          </ul>
+        </div>
+        <!-- <div class="card-footer">
+          <small class="text-muted">Last updated 3 mins ago</small>
+        </div> -->
+      </div>
+    </div>
+    <div class="col">
+      <div class="card h-100">
+        <img style="border:1px solid white;"
+          src="https://free4kwallpapers.com/uploads/originals/2015/10/17/greate-scene-of-weather-wallpaper.jpg"
+          class="card-img-top" alt="...">
+        <div class="card-body" id="card4">
+          <h5 class="card-title" id="cri">Temperature</h5>
+          <ul type="none">
+            <li>Temprature = <span id="temp"></span><sup>o</sup>C</li>
+            <li>Min Temprature = <span id="min_temp"></span><sup>o</sup>C</li>
+            <li>Max Temprature = <span id="max_temp"></span><sup>o</sup>C</li>
+          </ul>
+          <!-- <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p> -->
+        </div>
+        <!-- <div class="card-footer">
+          <small class="text-muted">Last updated 3 mins ago</small>
+        </div> -->
+      </div>
+    </div>
+    <div class="col">
+      <div class="card h-100">
+        <img style="border:1px solid white;"
+          src="data:image/jpeg;base64,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"
+          class="card-img-top" alt="...">
+        <div class="card-body" id="card4">
+          <h5 class="card-title" id="cri">Sun information</h5>
+          <ul type="none">
+            <li>Humidity = <span id="humidity"></span><sup>o</sup>C</li>
+            <li>Sunrise = <span id="sunrise"></span><sup>o</sup>C</li>
+            <li>Sunset = <span id="sunset"></span><sup>o</sup>C</li>
+          </ul>
+          <!-- <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional -->
+            <!-- content. This card has even longer content than the first to show that equal height action.</p> -->
+        </div>
+        <!-- <div class="card-footer">
+          <small class="text-muted">Last updated 3 mins ago</small>
+        </div> -->
+      </div>
+    </div>
+  </div>
+  <!-- Footer -->
+  <footer class="text-center text-lg-start bg-dark text-muted">
+    <!-- Section: Social media -->
+    <section class="d-flex justify-content-center justify-content-lg-between p-4 border-bottom">
+      <!-- Left -->
+      <div class="me-5 d-none  d-lg-block">
+        <span>Get connected to know the weather Infromation</span>
+      </div>
+      <!-- Left -->
+
+      <!-- Right -->
+      <div>
+        <a href="" class="me-4 link-secondary">
+          <i class="fab fa-facebook-f"></i>
+        </a>
+        <a href="" class="me-4 link-secondary">
+          <i class="fab fa-twitter"></i>
+        </a>
+        <a href="" class="me-4 link-secondary">
+          <i class="fab fa-google"></i>
+        </a>
+        <a href="" class="me-4 link-secondary">
+          <i class="fab fa-instagram"></i>
+        </a>
+        <a href="" class="me-4 link-secondary">
+          <i class="fab fa-linkedin"></i>
+        </a>
+        <a href="" class="me-4 link-secondary">
+          <i class="fab fa-github"></i>
+        </a>
+      </div>
+      <!-- Right -->
+    </section>
+    <!-- Section: Social media -->
+
+    <!-- Section: Links  -->
+    <section class="">
+      <div class="container text-center text-md-start mt-5">
+        <!-- Grid row -->
+        <div class="row mt-3">
+          <!-- Grid column -->
+          <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+            <!-- Content -->
+            <h6 class="text-uppercase fw-bold mb-4">
+              <i class="fas fa-gem me-3 text-secondary"></i>Company name
+            </h6>
+            <p>
+              The weather web application is basically made upon the rapid API based technology.
+            </p>
+          </div>
+          <!-- Grid column -->
+
+          <!-- Grid column -->
+          <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
+            <!-- Links -->
+            <h6 class="text-uppercase fw-bold mb-4">
+              Tools
+            </h6>
+            <p>
+              <a href="#!" class="text-reset">HTML</a>
+            </p>
+            <p>
+              <a href="#!" class="text-reset">CSS</a>
+            </p>
+            <p>
+              <a href="#!" class="text-reset">Bootstrap</a>
+            </p>
+            <p>
+              <a href="#!" class="text-reset">Javascript</a>
+            </p>
+          </div>
+          <!-- Grid column -->
+
+          <!-- Grid column -->
+          <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
+            <!-- Links -->
+            <h6 class="text-uppercase fw-bold mb-4">
+              References
+            </h6>
+            <p>
+              <a href="#!" class="text-reset" style="color:ba">W3school</a>
+            </p>
+            <p>
+              <a href="#!" class="text-reset">Geeksforgeeks</a>
+            </p>
+            <p>
+              <a href="#!" class="text-reset">javapoint</a>
+            </p>
+            <p>
+              <a href="#!" class="text-reset">youtube</a>
+            </p>
+          </div>
+          <!-- Grid column -->
+
+          <!-- Grid column -->
+          <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+            <!-- Links -->
+            <h6 class="text-uppercase fw-bold mb-4">Contact</h6>
+            <p><i class="fas fa-home me-3 text-secondary"></i>LIG - 109,Bharti Niketan, MP nagar, Bhopal 462023, INDIA
+            </p>
+            <p>
+              <i class="fas fa-envelope me-3 text-secondary"></i>
+              icollege674@gmail.com
+            </p>
+            <p><i class="fas fa-phone me-3 text-primary"></i> + 91 790 396 0997</p>
+            <p><i class="fas fa-print me-3 text-secondary"></i> + 91 912 806 2090</p>
+          </div>
+          <!-- Grid column -->
+        </div>
+        <!-- Grid row -->
+      </div>
+    </section>
+    <!-- Section: Links  -->
+
+    <!-- Copyright -->
+    <div class="text-center p-4" style="background-color: rgba(195, 0, 255, 0.859);">
+      <small style="color:white">© 2021 Copyright:</small>
+      <a class="text-denger fw-bold" href="https://www.instagram.com/again_deepak" style="color:white">AgainDeepap.com</a>
+    </div>
+    <!-- Copyright -->
+  </footer>
+  <!-- Footer -->
+  <!-- Footer -->
+  <!-- <p style="background-color:blue;text-align:center"><span id='cityName'></span>Temprature is <span id='temp'></span><sup> o</sup>C</p> -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
+    crossorigin="anonymous"></script>
+  <script src="/server/javascript.js"></script>
+</body>
+
+</html>
